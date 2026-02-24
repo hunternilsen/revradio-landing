@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COMINT — Communications Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --domo-blue: #99CCEE;
+      --domo-blue-dark: #7BB8E0;
+      --neutral-50: #F1F6FA;
+      --neutral-100: #DCE4EA;
+      --neutral-200: #B7C1CB;
+      --neutral-600: #68737F;
+      --neutral-900: #3F454D;
+      --accent-orange: #FF9922;
+      --accent-orange-hover: #E8891F;
+      --accent-purple: #776CB0;
+      --accent-mint: #ADD4C1;
+      --accent-pink: #C179BD;
+      --font-primary: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --shadow-sm: 0 1px 3px rgba(63,69,77,0.08), 0 1px 2px rgba(63,69,77,0.06);
+      --shadow-md: 0 4px 12px rgba(63,69,77,0.1), 0 2px 4px rgba(63,69,77,0.06);
+      --shadow-lg: 0 8px 20px rgba(63,69,77,0.08), 0 4px 8px rgba(63,69,77,0.04);
+      --shadow-blue-glow: 0 4px 20px rgba(153, 204, 238, 0.3);
+      --shadow-orange-glow: 0 4px 20px rgba(255, 153, 34, 0.3);
+      --radius-sm: 6px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --ease-smooth: cubic-bezier(0.83, 0, 0.17, 1);
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-primary);
+      color: var(--neutral-900);
+      background: #FFFFFF;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(180deg, #99CCEE 0%, #7BB8E0 100%);
+      padding: 3rem 2rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.015;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='4' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      margin-bottom: 1.25rem;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.25rem, 5vw, 3.25rem);
+      font-weight: 800;
+      color: white;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 300;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .hero-logo {
+      margin-bottom: 1.5rem;
+    }
+
+    /* ===== TAB NAV ===== */
+    .tab-nav {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 1rem 1.5rem;
+      background: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.8);
+      border: none;
+      font-family: var(--font-primary);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s var(--ease-smooth);
+      border-bottom: 3px solid transparent;
+      position: relative;
+    }
+
+    .tab-btn:first-child { border-radius: var(--radius-lg) 0 0 0; }
+    .tab-btn:last-child { border-radius: 0 var(--radius-lg) 0 0; }
+
+    .tab-btn:hover {
+      background: rgba(255,255,255,0.25);
+      color: white;
+    }
+
+    .tab-btn.active {
+      background: white;
+      color: var(--neutral-900);
+      border-bottom-color: var(--accent-orange);
+    }
+
+    .tab-btn .tab-icon {
+      display: block;
+      font-size: 1.25rem;
+      margin-bottom: 0.25rem;
+    }
+
+    /* ===== TAB CONTENT ===== */
+    .tab-content {
+      display: none;
+      animation: domoFadeInUp 0.4s var(--ease-out-expo);
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* ===== SECTIONS ===== */
+    .section {
+      padding: 4rem 2rem;
+    }
+
+    .section-alt {
+      background: var(--neutral-50);
+    }
+
+    .section-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+      font-weight: 700;
+      color: var(--neutral-900);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .section-header p {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--neutral-600);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ===== CARDS ===== */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .card-grid-2 {
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    }
+
+    .card {
+      padding: 2rem;
+      background: white;
+      border: 1px solid var(--neutral-100);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s var(--ease-smooth);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(153, 204, 238, 0.3);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.25rem;
+      background: var(--neutral-50);
+      color: var(--domo-blue);
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--neutral-900);
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--neutral-600);
+      line-height: 1.6;
+    }
+
+    /* ===== STATS ===== */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+      text-align: center;
+    }
+
+    .stat {
+      padding: 1.5rem;
+    }
+
+    .stat-value {
+      font-size: 2.75rem;
+      font-weight: 300;
+      color: var(--domo-blue);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--neutral-600);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== SCORE BADGE ===== */
+    .score-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .score-badge.high { background: #e6f7ee; color: #16a34a; }
+    .score-badge.mid { background: #fff7ed; color: #d97706; }
+    .score-badge.low { background: #fef2f2; color: #dc2626; }
+
+    /* ===== STC CATEGORIES ===== */
+    .stc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .stc-card {
+      padding: 1.25rem;
+      background: white;
+      border: 1px solid var(--neutral-100);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+      transition: all 0.3s var(--ease-smooth);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stc-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--domo-blue);
+    }
+
+    .stc-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .stc-number {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--domo-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.35rem;
+    }
+
+    .stc-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--neutral-900);
+      margin-bottom: 0.35rem;
+    }
+
+    .stc-desc {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--neutral-600);
+      line-height: 1.5;
+    }
+
+    /* ===== STEPS ===== */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .step {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--domo-blue);
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step-content h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--neutral-900);
+      margin-bottom: 0.25rem;
+    }
+
+    .step-content p {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--neutral-600);
+      line-height: 1.6;
+    }
+
+    /* ===== WORKFLOW DIAGRAM ===== */
+    .workflow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+    }
+
+    .workflow-step {
+      padding: 0.75rem 1.25rem;
+      background: white;
+      border: 1.5px solid var(--neutral-100);
+      border-radius: var(--radius-md);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--neutral-900);
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+    }
+
+    .workflow-arrow {
+      color: var(--domo-blue);
+      font-size: 1.25rem;
+      font-weight: 300;
+    }
+
+    /* ===== COMPARISON TABLE ===== */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .compare-table th {
+      background: var(--neutral-900);
+      color: white;
+      padding: 0.85rem 1.25rem;
+      text-align: left;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .compare-table td {
+      padding: 0.75rem 1.25rem;
+      border-bottom: 1px solid var(--neutral-100);
+      font-size: 0.875rem;
+      color: var(--neutral-600);
+    }
+
+    .compare-table tr:nth-child(even) td {
+      background: var(--neutral-50);
+    }
+
+    .compare-table .check { color: #16a34a; font-weight: 700; }
+    .compare-table .cross { color: var(--neutral-200); }
+
+    /* ===== BUTTONS ===== */
+    .btn-primary {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      background: var(--accent-orange);
+      color: white;
+      border: none;
+      border-radius: var(--radius-md);
+      font-family: var(--font-primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s var(--ease-smooth);
+      text-decoration: none;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-orange-hover);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-orange-glow);
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      background: transparent;
+      color: var(--neutral-900);
+      border: 1.5px solid var(--neutral-200);
+      border-radius: var(--radius-md);
+      font-family: var(--font-primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s var(--ease-smooth);
+      text-decoration: none;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--domo-blue);
+      color: var(--domo-blue);
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--neutral-900);
+      color: rgba(255,255,255,0.6);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+
+    .footer strong {
+      color: white;
+      font-weight: 600;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes domoFadeInUp {
+      from { opacity: 0; transform: translateY(1.5rem); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .domo-stagger > * {
+      opacity: 0;
+      animation: domoFadeInUp 0.5s var(--ease-out-expo) forwards;
+    }
+    .domo-stagger > *:nth-child(1) { animation-delay: 0.05s; }
+    .domo-stagger > *:nth-child(2) { animation-delay: 0.1s; }
+    .domo-stagger > *:nth-child(3) { animation-delay: 0.15s; }
+    .domo-stagger > *:nth-child(4) { animation-delay: 0.2s; }
+    .domo-stagger > *:nth-child(5) { animation-delay: 0.25s; }
+    .domo-stagger > *:nth-child(6) { animation-delay: 0.3s; }
+    .domo-stagger > *:nth-child(7) { animation-delay: 0.35s; }
+    .domo-stagger > *:nth-child(8) { animation-delay: 0.4s; }
+    .domo-stagger > *:nth-child(9) { animation-delay: 0.45s; }
+
+    /* ===== CALLOUT BOX ===== */
+    .callout {
+      padding: 1.5rem;
+      border-radius: var(--radius-lg);
+      border-left: 4px solid var(--domo-blue);
+      background: rgba(153,204,238,0.08);
+      margin: 1.5rem 0;
+    }
+
+    .callout h4 {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--neutral-900);
+      margin-bottom: 0.35rem;
+    }
+
+    .callout p {
+      font-size: 0.875rem;
+      color: var(--neutral-600);
+      line-height: 1.6;
+    }
+
+    /* ===== REVIEW TYPES ===== */
+    .review-types {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .review-type {
+      padding: 1.5rem;
+      background: white;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--neutral-100);
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+      transition: all 0.3s var(--ease-smooth);
+    }
+
+    .review-type:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .review-type-icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .review-type h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--neutral-900);
+      margin-bottom: 0.25rem;
+    }
+
+    .review-type p {
+      font-size: 0.8rem;
+      color: var(--neutral-600);
+      line-height: 1.5;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .hero { padding: 2rem 1.25rem 0; }
+      .section { padding: 3rem 1.25rem; }
+      .tab-btn { font-size: 0.8rem; padding: 0.75rem 1rem; }
+      .tab-btn .tab-icon { font-size: 1.1rem; }
+      .workflow { flex-direction: column; }
+      .workflow-arrow { transform: rotate(90deg); }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 480px) {
+      .tab-nav { flex-direction: column; }
+      .tab-btn:first-child { border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+      .tab-btn:last-child { border-radius: 0; }
+    }
+
+    /* ===== ACCESSIBILITY ===== */
+    *:focus-visible {
+      outline: 2px solid var(--domo-blue);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HERO ===== -->
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="56" height="56">
+          <path fill="#FFF" d="M150.5,328.6c12.4,13.8,21.2,30.9,25,49.8,9.9-48.8,53-85.5,104.7-85.5s94.8,36.8,104.7,85.6v-85.6l106.8,106.8,107.1-106.8v85.6c9.9-48.8,53-85.6,104.7-85.6s79.2,24.8,96.4,60.7V0H0v292.9h70.8c31.7,0,60.1,13.8,79.7,35.7Z"/>
+          <path fill="#FFF" d="M703.6,506.6c-51.7,0-94.8-36.8-104.7-85.6v85.6h-36v-127.8l-71.1,71.4-71.4-71.4v127.8h-35.4v-85.6c-9.9,48.8-53,85.6-104.7,85.6s-94.8-36.7-104.7-85.5c-3.8,18.9-12.6,36-25,49.8-19.6,21.9-48,35.7-79.7,35.7H0v293.4h800v-354.2c-17.2,35.9-53.9,60.7-96.4,60.7h0Z"/>
+          <path fill="#FFF" d="M280.2,471c39.4,0,71.3-31.9,71.3-71.3s-31.9-71.3-71.3-71.3-71.3,31.9-71.3,71.3,31.9,71.3,71.3,71.3Z"/>
+          <path fill="#FFF" d="M142.1,399.7c0-37.8-29.4-68.7-66.6-71.1h-40.1v142.2h40.1c37.2-2.4,66.6-33.3,66.6-71.1h0Z"/>
+          <path fill="#FFF" d="M703.6,471c39.4,0,71.3-31.9,71.3-71.3s-31.9-71.3-71.3-71.3-71.3,31.9-71.3,71.3,31.9,71.3,71.3,71.3Z"/>
+          <path fill="#99CCEE" d="M150.5,470.8c12.4-13.8,21.2-30.9,25-49.8,9.9,48.8,53,85.5,104.7,85.5s94.8-36.8,104.7-85.6v85.6h35.4v-127.8l71.4,71.4,71.1-71.4v127.8h36v-85.6c9.9,48.8,53,85.6,104.7,85.6s79.2-24.8,96.4-60.7v-92.2c-17.2-35.9-53.9-60.7-96.4-60.7s-94.8,36.8-104.7,85.6v-85.6l-107.1,106.8-106.8-106.8v85.6c-9.9-48.8-53-85.6-104.7-85.6s-94.8,36.7-104.7,85.5c-3.8-18.9-12.6-36-25-49.8-19.6-21.9-48-35.7-79.7-35.7H0v213.7h70.8c31.7,0,60.1-13.8,79.7-35.7h0ZM703.6,328.5c39.4,0,71.3,31.9,71.3,71.3s-31.9,71.3-71.3,71.3-71.3-31.9-71.3-71.3,31.9-71.3,71.3-71.3ZM280.2,328.5c39.4,0,71.3,31.9,71.3,71.3s-31.9,71.3-71.3,71.3-71.3-31.9-71.3-71.3,31.9-71.3,71.3-71.3ZM35.4,328.6h40.1c37.2,2.4,66.6,33.3,66.6,71.1s-29.4,68.7-66.6,71.1h-40.1v-142.2h0Z"/>
+        </svg>
+      </div>
+      <span class="hero-badge">Domo Pro-Code App</span>
+      <h1>COMINT</h1>
+      <p>Communications Intelligence for sales call reviews. Score, track, and improve your team's performance with the STC framework.</p>
+    </div>
+
+    <!-- Tab Navigation -->
+    <nav class="tab-nav">
+      <button class="tab-btn active" onclick="switchTab('overview')" aria-selected="true">
+        <span class="tab-icon">&#9733;</span>
+        Overview
+      </button>
+      <button class="tab-btn" onclick="switchTab('onboarding')" aria-selected="false">
+        <span class="tab-icon">&#9654;</span>
+        Get Started
+      </button>
+      <button class="tab-btn" onclick="switchTab('features')" aria-selected="false">
+        <span class="tab-icon">&#9881;</span>
+        Features
+      </button>
+    </nav>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- TAB 1: OVERVIEW — Explaining COMINT to Sales Leaders                  -->
+  <!-- ===================================================================== -->
+  <div id="tab-overview" class="tab-content active">
+
+    <!-- Stats -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="stats-row domo-stagger">
+          <div class="stat">
+            <div class="stat-value" data-value="9">0</div>
+            <div class="stat-label">STC Categories</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value" data-value="3">0</div>
+            <div class="stat-label">Review Types</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value" data-value="8000">0</div>
+            <div class="stat-label">Calls Indexed</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">&#8734;</div>
+            <div class="stat-label">Improvement Potential</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why COMINT -->
+    <section class="section section-alt">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2>Why COMINT?</h2>
+          <p>Manual Gong review with standardized scoring gives leaders visibility into rep skill gaps and coaching opportunities.</p>
+        </div>
+        <div class="card-grid domo-stagger">
+          <div class="card">
+            <div class="card-icon">&#128269;</div>
+            <h3>Standardized Scoring</h3>
+            <p>Every call scored on the same 9-category STC framework. No more subjective, inconsistent feedback across reviewers.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">&#128202;</div>
+            <h3>Aggregated Dashboards</h3>
+            <p>See rep-level and team-level score trends over time. Identify who needs coaching and where the gaps are.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">&#127942;</div>
+            <h3>Top Performers</h3>
+            <p>Surface the best calls and highest-scoring reps so new hires can learn from real examples of excellence.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">&#129302;</div>
+            <h3>AI + Human Reviews</h3>
+            <p>Three review types work together: Leadership reviews, Peer reviews, and automated AI scoring for complete coverage.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">&#128274;</div>
+            <h3>Role-Based Access</h3>
+            <p>Leaders see all reps and full reviewer names. Reps see their own calls with anonymized peer feedback.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">&#9889;</div>
+            <h3>Built on Domo</h3>
+            <p>Runs natively in Domo with AppDB storage and dataset syncing. No external tools or infrastructure needed.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Review Types -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2>Three Types of Reviews</h2>
+          <p>Each review type provides a unique perspective on call quality.</p>
+        </div>
+        <div class="review-types domo-stagger">
+          <div class="review-type">
+            <div class="review-type-icon">&#128100;</div>
+            <h4>Leadership</h4>
+            <p>Managers and directors review calls to set standards and identify coaching opportunities.</p>
+          </div>
+          <div class="review-type">
+            <div class="review-type-icon">&#128101;</div>
+            <h4>Peer</h4>
+            <p>Reps review each other's calls. Anonymized in the dashboard to encourage honest feedback.</p>
+          </div>
+          <div class="review-type">
+            <div class="review-type-icon">&#129302;</div>
+            <h4>AI-Generated</h4>
+            <p>Automated daily scoring via LLM analysis of call transcripts. Ensures every call gets baseline coverage.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Before/After -->
+    <section class="section section-alt">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2>Before &amp; After COMINT</h2>
+        </div>
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Capability</th>
+              <th>Before COMINT</th>
+              <th>With COMINT</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Call review consistency</td>
+              <td class="cross">Ad hoc, varies by manager</td>
+              <td class="check">Standardized 9-category STC scoring</td>
+            </tr>
+            <tr>
+              <td>Skill gap identification</td>
+              <td class="cross">Gut feel, quarterly</td>
+              <td class="check">Real-time dashboard with category breakdowns</td>
+            </tr>
+            <tr>
+              <td>Peer learning</td>
+              <td class="cross">Informal shadowing</td>
+              <td class="check">Top Performers section, anonymized peer reviews</td>
+            </tr>
+            <tr>
+              <td>Review coverage</td>
+              <td class="cross">~5% of calls reviewed</td>
+              <td class="check">AI scores every call, humans review strategically</td>
+            </tr>
+            <tr>
+              <td>New hire ramp time</td>
+              <td class="cross">Learn by trial and error</td>
+              <td class="check">Study top-rated calls across every STC category</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- TAB 2: ONBOARDING — Getting Started for New Users                     -->
+  <!-- ===================================================================== -->
+  <div id="tab-onboarding" class="tab-content">
+
+    <!-- How It Works -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2>How COMINT Works</h2>
+          <p>From opening the app to submitting your first review in under 5 minutes.</p>
+        </div>
+
+        <div class="workflow">
+          <div class="workflow-step">Open COMINT<br><small style="color: var(--neutral-200);">in Domo</small></div>
+          <span class="workflow-arrow">&#8594;</span>
+          <div class="workflow-step">Pick a Call<br><small style="color: var(--neutral-200);">from the queue</small></div>
+          <span class="workflow-arrow">&#8594;</span>
+          <div class="workflow-step">Listen &amp; Score<br><small style="color: var(--neutral-200);">9 STC categories</small></div>
+          <span class="workflow-arrow">&#8594;</span>
+          <div class="workflow-step">Submit Review<br><small style="color: var(--neutral-200);">scores + comments</small></div>
+          <span class="workflow-arrow">&#8594;</span>
+          <div class="workflow-step">View Dashboard<br><small style="color: var(--neutral-200);">track progress</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step-by-Step -->
+    <section class="section section-alt">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2>Step-by-Step Guide</h2>
+        </div>
+        <div class="steps domo-stagger">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h3>Open the Review Queue</h3>
+              <p>The queue shows all available calls filtered by your role. Leaders see all reps; reps see their own calls for peer review. Use column filters to narrow by account, rep, stage, date, or duration.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h3>Select a Call to Review</h3>
+              <p>Click any row to open the call workspace. You'll see the embedded Gong player on the left and the review form on the right. Collapsible call details and AI summary sections appear above.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h3>Listen and Score</h3>
+              <p>Play the Gong recording while filling out the review form. Score each of the 9 STC categories from 0-100 and optionally add comments. The overall score calculates automatically as the average.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <h3>Submit Your Review</h3>
+              <p>Hit submit. Your review is saved to the AppDB collection and automatically synced to the dashboard dataset. A success toast confirms the submission and you return to the queue.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-content">
+              <h3>Check the Dashboard</h3>
+              <p>Switch to the User Dashboard to see aggregated scores, KPI cards for each STC category, score trends over time, and the Top Performers section. Filter by rep, account, date range, or review type.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tips -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2>Tips for Great Reviews</h2>
+        </div>
+        <div class="card-grid card-grid-2 domo-stagger">
+          <div class="card">
+            <h3>Be Specific in Comments</h3>
+            <p>Instead of "good job," note the exact moment: "At 4:32, the rep asked a strong discovery question about budget timeline that revealed the real decision-maker." Specific feedback is actionable feedback.</p>
+          </div>
+          <div class="card">
+            <h3>Calibrate with the Team</h3>
+            <p>Review a few calls as a group first to align on what a 70 vs. 90 looks like for each category. The Top Performers section shows examples of high-scoring calls to use as reference points.</p>
+          </div>
+          <div class="card">
+            <h3>Use the Reviewed Calls Tab</h3>
+            <p>After submitting, switch to "Reviewed Calls" to see all your past reviews. You can sort by score to find patterns in your feedback and ensure you're scoring consistently.</p>
+          </div>
+          <div class="card">
+            <h3>Check AI Reviews First</h3>
+            <p>AI reviews run daily on every call. Before starting your own review, check if an AI score exists — it can help you calibrate and catch things you might have missed.</p>
+          </div>
+        </div>
+
+        <div class="callout">
+          <h4>Gong Login Required</h4>
+          <p>The embedded Gong player requires you to be logged into Gong via Okta SSO. If the player shows a login prompt, click the login button — the app will automatically reload the player when you return.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- TAB 3: FEATURES — STC Scoring System & Feature Showcase               -->
+  <!-- ===================================================================== -->
+  <div id="tab-features" class="tab-content">
+
+    <!-- STC Categories -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2>The STC Scoring Framework</h2>
+          <p>9 categories that measure the complete sales conversation, from preparation to demo execution.</p>
+        </div>
+        <div class="stc-grid domo-stagger">
+          <div class="stc-card">
+            <div class="stc-number">Category 1</div>
+            <div class="stc-name">Current Situation</div>
+            <div class="stc-desc">Did the rep understand where the prospect is today?</div>
+          </div>
+          <div class="stc-card">
+            <div class="stc-number">Category 2</div>
+            <div class="stc-name">Call Preparedness</div>
+            <div class="stc-desc">Was the rep prepared with research and an agenda?</div>
+          </div>
+          <div class="stc-card">
+            <div class="stc-number">Category 3</div>
+            <div class="stc-name">Problem Defined</div>
+            <div class="stc-desc">Did the rep clearly identify the prospect's pain points?</div>
+          </div>
+          <div class="stc-card">
+            <div class="stc-number">Category 4</div>
+            <div class="stc-name">Impact</div>
+            <div class="stc-desc">Was the business impact of the problem articulated?</div>
+          </div>
+          <div class="stc-card">
+            <div class="stc-number">Category 5</div>
+            <div class="stc-name">Ideal</div>
+            <div class="stc-desc">Did the rep paint a picture of the ideal future state?</div>
+          </div>
+          <div class="stc-card">
+            <div class="stc-number">Category 6</div>
+            <div class="stc-name">Benefit</div>
+            <div class="stc-desc">Were specific, quantifiable benefits discussed?</div>
+          </div>
+          <div class="stc-card">
+            <div class="stc-number">Category 7</div>
+            <div class="stc-name">Layering</div>
+            <div class="stc-desc">Did the rep layer questions to deepen understanding?</div>
+          </div>
+          <div class="stc-card">
+            <div class="stc-number">Category 8</div>
+            <div class="stc-name">Demo Preparedness</div>
+            <div class="stc-desc">Was the demo tailored to the prospect's specific needs?</div>
+          </div>
+          <div class="stc-card">
+            <div class="stc-number">Category 9</div>
+            <div class="stc-name">Quantified Value</div>
+            <div class="stc-desc">Did the rep tie Domo's value to measurable outcomes?</div>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top: 2rem;">
+          <h4>Scoring Scale: 0 &ndash; 100</h4>
+          <p>Each category is scored from 0 to 100. The overall score is the average of all 9 categories. Scores below 60 are flagged for coaching, 60-79 indicate solid performance, and 80+ represents excellence.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Features -->
+    <section class="section section-alt">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2>Platform Features</h2>
+          <p>Everything built into COMINT to make call reviews efficient and insightful.</p>
+        </div>
+        <div class="card-grid domo-stagger">
+          <div class="card">
+            <div class="card-icon">&#127916;</div>
+            <h3>Embedded Gong Player</h3>
+            <p>Listen to calls directly in the app. Split-pane view with the player on the left and scoring form on the right. No tab-switching needed.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">&#128200;</div>
+            <h3>Scores Over Time Chart</h3>
+            <p>Track rep improvement with time-series visualization. See individual and team score trends across all STC categories.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">&#128270;</div>
+            <h3>Inline Column Filters</h3>
+            <p>Spreadsheet-style filters on every column. Search by account, rep, stage, manager, date range, duration, and more.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">&#127380;</div>
+            <h3>Top Performers Section</h3>
+            <p>Highlights the best calls (80+ scores) and top reps. Click any call to view the review or open the workspace.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">&#128257;</div>
+            <h3>Review Carousel</h3>
+            <p>Navigate between multiple reviews on the same call. See Leadership, Peer, and AI reviews side by side.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">&#128101;</div>
+            <h3>Anonymous Peer Reviews</h3>
+            <p>Peer reviewer names are anonymized in the dashboard for non-leaders. Leaders always see actual reviewer identities.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">&#128196;</div>
+            <h3>AI Call Summaries</h3>
+            <p>Collapsible AI-generated call recap from Gong. Quickly understand what the call was about before diving into the full recording.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">&#128736;</div>
+            <h3>Modular Architecture</h3>
+            <p>Built with ES modules for maintainability. Queue, reviewed calls, workspace, and dashboard each in their own module.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Architecture Overview -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-header">
+          <h2>Architecture at a Glance</h2>
+          <p>How the pieces fit together under the hood.</p>
+        </div>
+        <div class="card-grid card-grid-2 domo-stagger">
+          <div class="card">
+            <h3>Data Flow</h3>
+            <p style="margin-bottom: 1rem;">Reviews write to AppDB, which syncs to a joined dataset for reading. Calls come from Gong via the Domo connector.</p>
+            <div class="workflow" style="margin: 0; justify-content: flex-start;">
+              <div class="workflow-step" style="font-size: 0.75rem; padding: 0.5rem 0.75rem;">Gong</div>
+              <span class="workflow-arrow">&#8594;</span>
+              <div class="workflow-step" style="font-size: 0.75rem; padding: 0.5rem 0.75rem;">Dataset</div>
+              <span class="workflow-arrow">&#8594;</span>
+              <div class="workflow-step" style="font-size: 0.75rem; padding: 0.5rem 0.75rem;">COMINT</div>
+              <span class="workflow-arrow">&#8594;</span>
+              <div class="workflow-step" style="font-size: 0.75rem; padding: 0.5rem 0.75rem;">AppDB</div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Module Structure</h3>
+            <p style="margin-bottom: 1rem;">8 ES modules with dependency injection for clean separation. No circular imports.</p>
+            <div style="font-size: 0.8rem; color: var(--neutral-600); font-family: monospace; line-height: 1.8;">
+              app.js &rarr; orchestrator<br>
+              &nbsp;&nbsp;modules/state.js<br>
+              &nbsp;&nbsp;modules/config.js<br>
+              &nbsp;&nbsp;modules/utils.js<br>
+              &nbsp;&nbsp;modules/api.js<br>
+              &nbsp;&nbsp;modules/queue.js<br>
+              &nbsp;&nbsp;modules/reviewed.js<br>
+              &nbsp;&nbsp;modules/workspace.js<br>
+              &nbsp;&nbsp;modules/dashboard.js
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <p><strong>COMINT</strong> &mdash; Communications Intelligence &nbsp;|&nbsp; v2.2.0 &nbsp;|&nbsp; Built on Domo</p>
+  </footer>
+
+  <script>
+    // Tab switching
+    function switchTab(tabName) {
+      // Hide all tabs
+      document.querySelectorAll('.tab-content').forEach(el => {
+        el.classList.remove('active');
+      });
+      // Deactivate all buttons
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-selected', 'false');
+      });
+      // Show selected tab
+      const tab = document.getElementById('tab-' + tabName);
+      if (tab) {
+        tab.classList.add('active');
+      }
+      // Activate button
+      const btns = document.querySelectorAll('.tab-btn');
+      const tabIndex = { overview: 0, onboarding: 1, features: 2 };
+      if (btns[tabIndex[tabName]]) {
+        btns[tabIndex[tabName]].classList.add('active');
+        btns[tabIndex[tabName]].setAttribute('aria-selected', 'true');
+      }
+      // Re-trigger animations
+      tab.querySelectorAll('.domo-stagger > *').forEach(el => {
+        el.style.animation = 'none';
+        el.offsetHeight; // trigger reflow
+        el.style.animation = '';
+      });
+      // Animate counters in the new tab
+      animateCounters(tab);
+    }
+
+    // Animated number counting
+    function animateValue(el, start, end, duration) {
+      const startTime = performance.now();
+      const suffix = el.dataset.suffix || '';
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeOutExpo = 1 - Math.pow(2, -10 * progress);
+        const current = start + (end - start) * easeOutExpo;
+        el.textContent = Math.floor(current).toLocaleString() + suffix;
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+
+    function animateCounters(container) {
+      const root = container || document;
+      root.querySelectorAll('[data-value]').forEach(el => {
+        const value = parseInt(el.dataset.value);
+        if (!isNaN(value)) {
+          animateValue(el, 0, value, 1200);
+        }
+      });
+    }
+
+    // Init on load
+    window.addEventListener('load', () => {
+      animateCounters(document.getElementById('tab-overview'));
+    });
+  </script>
+</body>
+</html>

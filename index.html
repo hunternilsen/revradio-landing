@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>COMINT — Communications Intelligence</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
+    rel="stylesheet">
   <style>
     /* ===================================================================
        COMINT Landing Page — Domo Events Template Design Language
@@ -71,7 +73,11 @@
       --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       font-family: var(--font-primary);
@@ -208,8 +214,13 @@
       transition: all 0.3s var(--ease-smooth);
     }
 
-    .tab-btn:first-child { border-radius: var(--radius-md) 0 0 0; }
-    .tab-btn:last-child { border-radius: 0 var(--radius-md) 0 0; }
+    .tab-btn:first-child {
+      border-radius: var(--radius-md) 0 0 0;
+    }
+
+    .tab-btn:last-child {
+      border-radius: 0 var(--radius-md) 0 0;
+    }
 
     .tab-btn:hover {
       background: rgba(255, 255, 255, 0.15);
@@ -665,46 +676,162 @@
       line-height: 1.5;
     }
 
-    /* ===== STC GRID ===== */
-    .stc-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+    /* ===== STC RUBRIC CARDS ===== */
+    .stc-list {
+      display: flex;
+      flex-direction: column;
       gap: var(--space-lg);
     }
 
-    .stc-card {
-      padding: var(--space-lg);
+    .stc-rubric {
       background: var(--color-bg-white);
       border: 1px solid var(--color-border-card);
       border-radius: var(--radius-md);
+      overflow: hidden;
       transition: border-color 0.3s var(--ease-smooth);
     }
 
-    .stc-card:hover {
+    .stc-rubric:hover {
       border-color: var(--domo-blue);
     }
 
-    .stc-number {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--domo-blue);
-      letter-spacing: 0.4px;
-      text-transform: uppercase;
-      margin-bottom: var(--space-sm);
+    .stc-rubric-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-lg);
+      cursor: pointer;
+      user-select: none;
     }
 
-    .stc-name {
-      font-size: 20px;
+    .stc-rubric-num {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--domo-blue);
+      color: var(--color-bg-white);
+      font-weight: 700;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stc-rubric-title {
+      flex: 1;
+    }
+
+    .stc-rubric-title h3 {
+      font-size: 18px;
       font-weight: 600;
       color: var(--color-text-heading);
-      margin-bottom: var(--space-sm);
+      line-height: 1.3;
     }
 
-    .stc-desc {
+    .stc-rubric-title p {
       font-size: 14px;
-      font-weight: 400;
       color: var(--color-text-muted);
+      line-height: 1.4;
+      margin-top: 2px;
+    }
+
+    .stc-rubric-toggle {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      color: var(--color-text-muted);
+      transition: transform 0.3s var(--ease-smooth);
+    }
+
+    .stc-rubric.open .stc-rubric-toggle {
+      transform: rotate(180deg);
+    }
+
+    .stc-rubric-body {
+      display: none;
+      padding: 0 var(--space-lg) var(--space-lg);
+    }
+
+    .stc-rubric.open .stc-rubric-body {
+      display: block;
+    }
+
+    .stc-tiers {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .stc-tier {
+      display: flex;
+      gap: var(--space-md);
+      padding: var(--space-md);
+      border-radius: var(--radius-sm);
+      border-left: 3px solid transparent;
+    }
+
+    .stc-tier.high {
+      background: rgba(20, 184, 166, 0.06);
+      border-left-color: #14B8A6;
+    }
+
+    .stc-tier.mid {
+      background: rgba(245, 158, 11, 0.06);
+      border-left-color: #F59E0B;
+    }
+
+    .stc-tier.low {
+      background: rgba(220, 38, 38, 0.06);
+      border-left-color: #DC2626;
+    }
+
+    .stc-tier-badge {
+      flex-shrink: 0;
+      width: 48px;
+      text-align: center;
+    }
+
+    .stc-tier-score {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .stc-tier.high .stc-tier-score {
+      color: #14B8A6;
+    }
+
+    .stc-tier.mid .stc-tier-score {
+      color: #F59E0B;
+    }
+
+    .stc-tier.low .stc-tier-score {
+      color: #DC2626;
+    }
+
+    .stc-tier-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+
+    .stc-tier-content p {
+      font-size: 14px;
+      color: var(--color-text-secondary);
       line-height: 1.5;
+      margin-bottom: var(--space-xs);
+    }
+
+    .stc-tier-example {
+      font-size: 13px;
+      color: var(--color-text-muted);
+      font-style: italic;
+      line-height: 1.4;
+      padding-left: var(--space-md);
+      border-left: 1px solid var(--color-border-light);
     }
 
     /* ===== CTA BANNER ===== */
@@ -766,23 +893,57 @@
 
     /* ===== ANIMATIONS ===== */
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(1.5rem); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(1.5rem);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    .domo-stagger > * {
+    .domo-stagger>* {
       opacity: 0;
       animation: fadeInUp 0.5s var(--ease-out-expo) forwards;
     }
-    .domo-stagger > *:nth-child(1) { animation-delay: 0.05s; }
-    .domo-stagger > *:nth-child(2) { animation-delay: 0.1s; }
-    .domo-stagger > *:nth-child(3) { animation-delay: 0.15s; }
-    .domo-stagger > *:nth-child(4) { animation-delay: 0.2s; }
-    .domo-stagger > *:nth-child(5) { animation-delay: 0.25s; }
-    .domo-stagger > *:nth-child(6) { animation-delay: 0.3s; }
-    .domo-stagger > *:nth-child(7) { animation-delay: 0.35s; }
-    .domo-stagger > *:nth-child(8) { animation-delay: 0.4s; }
-    .domo-stagger > *:nth-child(9) { animation-delay: 0.45s; }
+
+    .domo-stagger>*:nth-child(1) {
+      animation-delay: 0.05s;
+    }
+
+    .domo-stagger>*:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+
+    .domo-stagger>*:nth-child(3) {
+      animation-delay: 0.15s;
+    }
+
+    .domo-stagger>*:nth-child(4) {
+      animation-delay: 0.2s;
+    }
+
+    .domo-stagger>*:nth-child(5) {
+      animation-delay: 0.25s;
+    }
+
+    .domo-stagger>*:nth-child(6) {
+      animation-delay: 0.3s;
+    }
+
+    .domo-stagger>*:nth-child(7) {
+      animation-delay: 0.35s;
+    }
+
+    .domo-stagger>*:nth-child(8) {
+      animation-delay: 0.4s;
+    }
+
+    .domo-stagger>*:nth-child(9) {
+      animation-delay: 0.45s;
+    }
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 992px) {
@@ -795,8 +956,9 @@
         grid-template-columns: 1fr;
       }
 
-      .stc-grid {
-        grid-template-columns: repeat(2, 1fr);
+      .stc-tier {
+        flex-direction: column;
+        gap: var(--space-sm);
       }
 
       .cta-banner-inner {
@@ -844,8 +1006,8 @@
         grid-template-columns: 1fr;
       }
 
-      .stc-grid {
-        grid-template-columns: 1fr;
+      .stc-rubric-header {
+        flex-wrap: wrap;
       }
 
       .workflow {
@@ -862,8 +1024,13 @@
         flex-direction: column;
       }
 
-      .tab-btn:first-child { border-radius: var(--radius-md) var(--radius-md) 0 0; }
-      .tab-btn:last-child { border-radius: 0; }
+      .tab-btn:first-child {
+        border-radius: var(--radius-md) var(--radius-md) 0 0;
+      }
+
+      .tab-btn:last-child {
+        border-radius: 0;
+      }
     }
 
     /* ===== ACCESSIBILITY ===== */
@@ -873,13 +1040,17 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
+
+      *,
+      *::before,
+      *::after {
         animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
       }
     }
   </style>
 </head>
+
 <body>
 
   <!-- ===== HERO ===== -->
@@ -887,12 +1058,18 @@
     <div class="hero-inner">
       <div class="hero-logo">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="64" height="64">
-          <path fill="#99CCEE" d="M150.5,328.6c12.4,13.8,21.2,30.9,25,49.8,9.9-48.8,53-85.5,104.7-85.5s94.8,36.8,104.7,85.6v-85.6l106.8,106.8,107.1-106.8v85.6c9.9-48.8,53-85.6,104.7-85.6s79.2,24.8,96.4,60.7V0H0v292.9h70.8c31.7,0,60.1,13.8,79.7,35.7Z"/>
-          <path fill="#99CCEE" d="M703.6,506.6c-51.7,0-94.8-36.8-104.7-85.6v85.6h-36v-127.8l-71.1,71.4-71.4-71.4v127.8h-35.4v-85.6c-9.9,48.8-53,85.6-104.7,85.6s-94.8-36.7-104.7-85.5c-3.8,18.9-12.6,36-25,49.8-19.6,21.9-48,35.7-79.7,35.7H0v293.4h800v-354.2c-17.2,35.9-53.9,60.7-96.4,60.7h0Z"/>
-          <path fill="#99CCEE" d="M280.2,471c39.4,0,71.3-31.9,71.3-71.3s-31.9-71.3-71.3-71.3-71.3,31.9-71.3,71.3,31.9,71.3,71.3,71.3Z"/>
-          <path fill="#99CCEE" d="M142.1,399.7c0-37.8-29.4-68.7-66.6-71.1h-40.1v142.2h40.1c37.2-2.4,66.6-33.3,66.6-71.1h0Z"/>
-          <path fill="#99CCEE" d="M703.6,471c39.4,0,71.3-31.9,71.3-71.3s-31.9-71.3-71.3-71.3-71.3,31.9-71.3,71.3,31.9,71.3,71.3,71.3Z"/>
-          <path fill="#FFF" d="M150.5,470.8c12.4-13.8,21.2-30.9,25-49.8,9.9,48.8,53,85.5,104.7,85.5s94.8-36.8,104.7-85.6v85.6h35.4v-127.8l71.4,71.4,71.1-71.4v127.8h36v-85.6c9.9,48.8,53,85.6,104.7,85.6s79.2-24.8,96.4-60.7v-92.2c-17.2-35.9-53.9-60.7-96.4-60.7s-94.8,36.8-104.7,85.6v-85.6l-107.1,106.8-106.8-106.8v85.6c-9.9-48.8-53-85.6-104.7-85.6s-94.8,36.7-104.7,85.5c-3.8-18.9-12.6-36-25-49.8-19.6-21.9-48-35.7-79.7-35.7H0v213.7h70.8c31.7,0,60.1-13.8,79.7-35.7h0ZM703.6,328.5c39.4,0,71.3,31.9,71.3,71.3s-31.9,71.3-71.3,71.3-71.3-31.9-71.3-71.3,31.9-71.3,71.3-71.3ZM280.2,328.5c39.4,0,71.3,31.9,71.3,71.3s-31.9,71.3-71.3,71.3-71.3-31.9-71.3-71.3,31.9-71.3,71.3-71.3ZM35.4,328.6h40.1c37.2,2.4,66.6,33.3,66.6,71.1s-29.4,68.7-66.6,71.1h-40.1v-142.2h0Z"/>
+          <path fill="#99CCEE"
+            d="M150.5,328.6c12.4,13.8,21.2,30.9,25,49.8,9.9-48.8,53-85.5,104.7-85.5s94.8,36.8,104.7,85.6v-85.6l106.8,106.8,107.1-106.8v85.6c9.9-48.8,53-85.6,104.7-85.6s79.2,24.8,96.4,60.7V0H0v292.9h70.8c31.7,0,60.1,13.8,79.7,35.7Z" />
+          <path fill="#99CCEE"
+            d="M703.6,506.6c-51.7,0-94.8-36.8-104.7-85.6v85.6h-36v-127.8l-71.1,71.4-71.4-71.4v127.8h-35.4v-85.6c-9.9,48.8-53,85.6-104.7,85.6s-94.8-36.7-104.7-85.5c-3.8,18.9-12.6,36-25,49.8-19.6,21.9-48,35.7-79.7,35.7H0v293.4h800v-354.2c-17.2,35.9-53.9,60.7-96.4,60.7h0Z" />
+          <path fill="#99CCEE"
+            d="M280.2,471c39.4,0,71.3-31.9,71.3-71.3s-31.9-71.3-71.3-71.3-71.3,31.9-71.3,71.3,31.9,71.3,71.3,71.3Z" />
+          <path fill="#99CCEE"
+            d="M142.1,399.7c0-37.8-29.4-68.7-66.6-71.1h-40.1v142.2h40.1c37.2-2.4,66.6-33.3,66.6-71.1h0Z" />
+          <path fill="#99CCEE"
+            d="M703.6,471c39.4,0,71.3-31.9,71.3-71.3s-31.9-71.3-71.3-71.3-71.3,31.9-71.3,71.3,31.9,71.3,71.3,71.3Z" />
+          <path fill="#FFF"
+            d="M150.5,470.8c12.4-13.8,21.2-30.9,25-49.8,9.9,48.8,53,85.5,104.7,85.5s94.8-36.8,104.7-85.6v85.6h35.4v-127.8l71.4,71.4,71.1-71.4v127.8h36v-85.6c9.9,48.8,53,85.6,104.7,85.6s79.2-24.8,96.4-60.7v-92.2c-17.2-35.9-53.9-60.7-96.4-60.7s-94.8,36.8-104.7,85.6v-85.6l-107.1,106.8-106.8-106.8v85.6c-9.9-48.8-53-85.6-104.7-85.6s-94.8,36.7-104.7,85.5c-3.8-18.9-12.6-36-25-49.8-19.6-21.9-48-35.7-79.7-35.7H0v213.7h70.8c31.7,0,60.1-13.8,79.7-35.7h0ZM703.6,328.5c39.4,0,71.3,31.9,71.3,71.3s-31.9,71.3-71.3,71.3-71.3-31.9-71.3-71.3,31.9-71.3,71.3-71.3ZM280.2,328.5c39.4,0,71.3,31.9,71.3,71.3s-31.9,71.3-71.3,71.3-71.3-31.9-71.3-71.3,31.9-71.3,71.3-71.3ZM35.4,328.6h40.1c37.2,2.4,66.6,33.3,66.6,71.1s-29.4,68.7-66.6,71.1h-40.1v-142.2h0Z" />
         </svg>
       </div>
 
@@ -902,19 +1079,30 @@
       </span>
 
       <h1>COMINT</h1>
-      <p class="hero-subtitle">Communications Intelligence for sales call reviews. Score, track, and improve your team's performance with the STC framework.</p>
+      <p class="hero-subtitle">Communications Intelligence for sales call reviews. Score, track, and improve your team's
+        performance with the STC framework.</p>
 
       <div class="hero-meta">
         <span class="hero-meta-item">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="white" stroke-width="1.5"/><path d="M1 6h14" stroke="white" stroke-width="1.5"/><path d="M5 1v2M11 1v2" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <rect x="1" y="2" width="14" height="12" rx="2" stroke="white" stroke-width="1.5" />
+            <path d="M1 6h14" stroke="white" stroke-width="1.5" />
+            <path d="M5 1v2M11 1v2" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+          </svg>
           9 STC Categories
         </span>
         <span class="hero-meta-item">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5" r="3" stroke="white" stroke-width="1.5"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <circle cx="8" cy="5" r="3" stroke="white" stroke-width="1.5" />
+            <path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+          </svg>
           3 Review Types
         </span>
         <span class="hero-meta-item">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 12l3-4 3 2 3-5 3 3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M2 12l3-4 3 2 3-5 3 3" stroke="white" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
           8,000+ Calls Indexed
         </span>
       </div>
@@ -968,28 +1156,32 @@
         <div class="section-header centered">
           <span class="section-overline">Overview</span>
           <h2>Why COMINT?</h2>
-          <p>Manual Gong review with standardized scoring gives leaders visibility into rep skill gaps and coaching opportunities.</p>
+          <p>Manual Gong review with standardized scoring gives leaders visibility into rep skill gaps and coaching
+            opportunities.</p>
         </div>
         <div class="card-grid domo-stagger">
           <div class="card-h">
             <div class="card-h-icon">&#128269;</div>
             <div class="card-h-body">
               <h3>Standardized Scoring</h3>
-              <p>Every call scored on the same 9-category STC framework. No more subjective, inconsistent feedback across reviewers.</p>
+              <p>Every call scored on the same 9-category STC framework. No more subjective, inconsistent feedback
+                across reviewers.</p>
             </div>
           </div>
           <div class="card-h">
             <div class="card-h-icon">&#128202;</div>
             <div class="card-h-body">
               <h3>Aggregated Dashboards</h3>
-              <p>See rep-level and team-level score trends over time. Identify who needs coaching and where the gaps are.</p>
+              <p>See rep-level and team-level score trends over time. Identify who needs coaching and where the gaps
+                are.</p>
             </div>
           </div>
           <div class="card-h">
             <div class="card-h-icon">&#127942;</div>
             <div class="card-h-body">
               <h3>Top Performers</h3>
-              <p>Surface the best calls and highest-scoring reps so new hires can learn from real examples of excellence.</p>
+              <p>Surface the best calls and highest-scoring reps so new hires can learn from real examples of
+                excellence.</p>
             </div>
           </div>
           <div class="card-h">
@@ -1003,14 +1195,16 @@
             <div class="card-h-icon">&#128274;</div>
             <div class="card-h-body">
               <h3>Role-Based Access</h3>
-              <p>Leaders see all reps and full reviewer names. Reps see their own calls with anonymized peer feedback.</p>
+              <p>Leaders see all reps and full reviewer names. Reps see their own calls with anonymized peer feedback.
+              </p>
             </div>
           </div>
           <div class="card-h">
             <div class="card-h-icon">&#9889;</div>
             <div class="card-h-body">
               <h3>Built on Domo</h3>
-              <p>Runs natively in Domo with AppDB storage and dataset syncing. No external tools or infrastructure needed.</p>
+              <p>Runs natively in Domo with AppDB storage and dataset syncing. No external tools or infrastructure
+                needed.</p>
             </div>
           </div>
         </div>
@@ -1039,7 +1233,8 @@
           <div class="review-type">
             <div class="review-type-icon">&#129302;</div>
             <h4>AI-Generated</h4>
-            <p>Automated daily scoring via LLM analysis of call transcripts. Ensures every call gets baseline coverage.</p>
+            <p>Automated daily scoring via LLM analysis of call transcripts. Ensures every call gets baseline coverage.
+            </p>
           </div>
         </div>
       </div>
@@ -1101,7 +1296,10 @@
         <div class="cta-banner-actions">
           <button class="btn-outline-dark" onclick="switchTab('onboarding')">
             Get Started
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
           </button>
         </div>
       </div>
@@ -1148,35 +1346,40 @@
             <div class="step-num">1</div>
             <div class="step-content">
               <h3>Open the Review Queue</h3>
-              <p>The queue shows all available calls filtered by your role. Leaders see all reps; reps see their own calls for peer review. Use column filters to narrow by account, rep, stage, date, or duration.</p>
+              <p>The queue shows all available calls filtered by your role. Leaders see all reps; reps see their own
+                calls for peer review. Use column filters to narrow by account, rep, stage, date, or duration.</p>
             </div>
           </div>
           <div class="step">
             <div class="step-num">2</div>
             <div class="step-content">
               <h3>Select a Call to Review</h3>
-              <p>Click any row to open the call workspace. You'll see the embedded Gong player on the left and the review form on the right. Collapsible call details and AI summary sections appear above.</p>
+              <p>Click any row to open the call workspace. You'll see the embedded Gong player on the left and the
+                review form on the right. Collapsible call details and AI summary sections appear above.</p>
             </div>
           </div>
           <div class="step">
             <div class="step-num">3</div>
             <div class="step-content">
               <h3>Listen and Score</h3>
-              <p>Play the Gong recording while filling out the review form. Score each of the 9 STC categories from 0&ndash;5 and optionally add comments. The overall score calculates automatically as the average.</p>
+              <p>Play the Gong recording while filling out the review form. Score each of the 9 STC categories from
+                0&ndash;5 and optionally add comments. The overall score calculates automatically as the average.</p>
             </div>
           </div>
           <div class="step">
             <div class="step-num">4</div>
             <div class="step-content">
               <h3>Submit Your Review</h3>
-              <p>Hit submit. Your review is saved to the AppDB collection and automatically synced to the dashboard dataset. A success toast confirms the submission and you return to the queue.</p>
+              <p>Hit submit. Your review is saved to the AppDB collection and automatically synced to the dashboard
+                dataset. A success toast confirms the submission and you return to the queue.</p>
             </div>
           </div>
           <div class="step">
             <div class="step-num">5</div>
             <div class="step-content">
               <h3>Check the Dashboard</h3>
-              <p>Switch to the User Dashboard to see aggregated scores, KPI cards for each STC category, score trends over time, and the Top Performers section. Filter by rep, account, date range, or review type.</p>
+              <p>Switch to the User Dashboard to see aggregated scores, KPI cards for each STC category, score trends
+                over time, and the Top Performers section. Filter by rep, account, date range, or review type.</p>
             </div>
           </div>
         </div>
@@ -1194,32 +1397,37 @@
           <div class="card-h">
             <div class="card-h-body">
               <h3>Be Specific in Comments</h3>
-              <p>Instead of "good job," note the exact moment: "At 4:32, the rep asked a strong discovery question about budget timeline that revealed the real decision-maker."</p>
+              <p>Instead of "good job," note the exact moment: "At 4:32, the rep asked a strong discovery question about
+                budget timeline that revealed the real decision-maker."</p>
             </div>
           </div>
           <div class="card-h">
             <div class="card-h-body">
               <h3>Calibrate with the Team</h3>
-              <p>Review a few calls as a group first to align on what a 3 vs. 5 looks like for each category. Top Performers shows high-scoring calls as reference.</p>
+              <p>Review a few calls as a group first to align on what a 3 vs. 5 looks like for each category. Top
+                Performers shows high-scoring calls as reference.</p>
             </div>
           </div>
           <div class="card-h">
             <div class="card-h-body">
               <h3>Use the Reviewed Calls Tab</h3>
-              <p>After submitting, switch to "Reviewed Calls" to see all your past reviews. Sort by score to find patterns and ensure consistency.</p>
+              <p>After submitting, switch to "Reviewed Calls" to see all your past reviews. Sort by score to find
+                patterns and ensure consistency.</p>
             </div>
           </div>
           <div class="card-h">
             <div class="card-h-body">
               <h3>Check AI Reviews First</h3>
-              <p>AI reviews run daily on every call. Before starting your own review, check if an AI score exists — it can help you calibrate.</p>
+              <p>AI reviews run daily on every call. Before starting your own review, check if an AI score exists — it
+                can help you calibrate.</p>
             </div>
           </div>
         </div>
 
         <div class="callout">
           <h4>Gong Login Required</h4>
-          <p>The embedded Gong player requires you to be logged into Gong via Okta SSO. If the player shows a login prompt, click the login button — the app will automatically reload the player when you return.</p>
+          <p>The embedded Gong player requires you to be logged into Gong via Okta SSO. If the player shows a login
+            prompt, click the login button — the app will automatically reload the player when you return.</p>
         </div>
       </div>
     </section>
@@ -1230,65 +1438,493 @@
   <!-- ===================================================================== -->
   <div id="tab-features" class="tab-content">
 
-    <!-- STC Categories -->
+    <!-- STC Scoring Rubric -->
     <section class="section">
       <div class="section-inner">
         <div class="section-header centered">
           <span class="section-overline">Scoring Framework</span>
-          <h2>The 9 STC Categories</h2>
-          <p>Measure the complete sales conversation, from preparation to demo execution.</p>
-        </div>
-        <div class="stc-grid domo-stagger">
-          <div class="stc-card">
-            <div class="stc-number">Category 1</div>
-            <div class="stc-name">Current Situation</div>
-            <div class="stc-desc">Did the rep understand where the prospect is today?</div>
-          </div>
-          <div class="stc-card">
-            <div class="stc-number">Category 2</div>
-            <div class="stc-name">Call Preparedness</div>
-            <div class="stc-desc">Was the rep prepared with research and an agenda?</div>
-          </div>
-          <div class="stc-card">
-            <div class="stc-number">Category 3</div>
-            <div class="stc-name">Problem Defined</div>
-            <div class="stc-desc">Did the rep clearly identify the prospect's pain points?</div>
-          </div>
-          <div class="stc-card">
-            <div class="stc-number">Category 4</div>
-            <div class="stc-name">Impact</div>
-            <div class="stc-desc">Was the business impact of the problem articulated?</div>
-          </div>
-          <div class="stc-card">
-            <div class="stc-number">Category 5</div>
-            <div class="stc-name">Ideal</div>
-            <div class="stc-desc">Did the rep paint a picture of the ideal future state?</div>
-          </div>
-          <div class="stc-card">
-            <div class="stc-number">Category 6</div>
-            <div class="stc-name">Benefit</div>
-            <div class="stc-desc">Were specific, quantifiable benefits discussed?</div>
-          </div>
-          <div class="stc-card">
-            <div class="stc-number">Category 7</div>
-            <div class="stc-name">Layering</div>
-            <div class="stc-desc">Did the rep layer questions to deepen understanding?</div>
-          </div>
-          <div class="stc-card">
-            <div class="stc-number">Category 8</div>
-            <div class="stc-name">Demo Preparedness</div>
-            <div class="stc-desc">Was the demo tailored to the prospect's specific needs?</div>
-          </div>
-          <div class="stc-card">
-            <div class="stc-number">Category 9</div>
-            <div class="stc-name">Quantified Value</div>
-            <div class="stc-desc">Did the rep tie Domo's value to measurable outcomes?</div>
-          </div>
+          <h2>The STC Rubric</h2>
+          <p>Each category is scored 0&ndash;5. Click any category to see scoring criteria and examples.</p>
         </div>
 
-        <div class="callout">
+        <div class="callout" style="margin-top: 0; margin-bottom: var(--space-xl);">
           <h4>Scoring Scale: 0 &ndash; 5</h4>
-          <p>Each category is scored from 0 to 5. The overall score is the average of all 9 categories. Scores below 3.0 are flagged for coaching, 3.0&ndash;3.9 indicate solid performance, and 4.0+ represents excellence.</p>
+          <p>The overall score is the average of all 9 categories. Scores below 3.0 are flagged for coaching,
+            3.0&ndash;3.9 indicate solid performance, and 4.0+ represents excellence.</p>
+        </div>
+
+        <div class="stc-list domo-stagger">
+
+          <!-- Category 1: Current Situation -->
+          <div class="stc-rubric open">
+            <div class="stc-rubric-header" onclick="this.parentElement.classList.toggle('open')">
+              <div class="stc-rubric-num">1</div>
+              <div class="stc-rubric-title">
+                <h3>Current Situation</h3>
+                <p>Did the rep explore where the prospect is today with genuine curiosity?</p>
+              </div>
+              <svg class="stc-rubric-toggle" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="stc-rubric-body">
+              <div class="stc-tiers">
+                <div class="stc-tier high">
+                  <div class="stc-tier-badge">
+                    <div class="stc-tier-score">4&ndash;5</div>
+                    <div class="stc-tier-label">High</div>
+                  </div>
+                  <div class="stc-tier-content">
+                    <p>Genuine curiosity with broad, open-ended questions that let the prospect describe their world.</p>
+                    <div class="stc-tier-example">&ldquo;Could you walk me through a typical day or week in your
+                      role?&rdquo;</div>
+                  </div>
+                </div>
+                <div class="stc-tier mid">
+                  <div class="stc-tier-badge">
+                    <div class="stc-tier-score">2&ndash;3</div>
+                    <div class="stc-tier-label">Mid</div>
+                  </div>
+                  <div class="stc-tier-content">
+                    <p>Decent but surface-level questions &mdash; gets the &ldquo;what&rdquo; but not the &ldquo;how&rdquo;
+                      or &ldquo;why.&rdquo;</p>
+                    <div class="stc-tier-example">&ldquo;What are your top 3 priorities this quarter?&rdquo;</div>
+                  </div>
+                </div>
+                <div class="stc-tier low">
+                  <div class="stc-tier-badge">
+                    <div class="stc-tier-score">0&ndash;1</div>
+                    <div class="stc-tier-label">Low</div>
+                  </div>
+                  <div class="stc-tier-content">
+                    <p>Closed-ended or leading questions, or jumps directly to problems without exploration.</p>
+                    <div class="stc-tier-example">&ldquo;So, are you struggling with lead generation?&rdquo;</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 2: Call Preparedness -->
+          <div class="stc-rubric">
+            <div class="stc-rubric-header" onclick="this.parentElement.classList.toggle('open')">
+              <div class="stc-rubric-num">2</div>
+              <div class="stc-rubric-title">
+                <h3>Call Preparedness</h3>
+                <p>Did the rep&rsquo;s questions show specific research into the customer&rsquo;s company or industry?</p>
+              </div>
+              <svg class="stc-rubric-toggle" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="stc-rubric-body">
+              <div class="stc-tiers">
+                <div class="stc-tier high">
+                  <div class="stc-tier-badge">
+                    <div class="stc-tier-score">4&ndash;5</div>
+                    <div class="stc-tier-label">High</div>
+                  </div>
+                  <div class="stc-tier-content">
+                    <p>Questions show specific research into the customer&rsquo;s company, industry, or recent news.</p>
+                    <div class="stc-tier-example">&ldquo;I saw your CEO&rsquo;s recent article on sustainability &mdash;
+                      how does that initiative impact your team&rsquo;s goals?&rdquo;</div>
+                  </div>
+                </div>
+                <div class="stc-tier mid">
+                  <div class="stc-tier-badge">
+                    <div class="stc-tier-score">2&ndash;3</div>
+                    <div class="stc-tier-label">Mid</div>
+                  </div>
+                  <div class="stc-tier-content">
+                    <p>Basic research (knows company name/product) but lacks deeper insights into their specific situation.</p>
+                    <div class="stc-tier-example">&ldquo;Since you&rsquo;re in the software industry, are you seeing X
+                      trend?&rdquo;</div>
+                  </div>
+                </div>
+                <div class="stc-tier low">
+                  <div class="stc-tier-badge">
+                    <div class="stc-tier-score">0&ndash;1</div>
+                    <div class="stc-tier-label">Low</div>
+                  </div>
+                  <div class="stc-tier-content">
+                    <p>The call felt generic with no evidence of any research or preparation.</p>
+                    <div class="stc-tier-example">&ldquo;So, tell me what your company does.&rdquo;</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 3: Problem Defined -->
+          <div class="stc-rubric">
+            <div class="stc-rubric-header" onclick="this.parentElement.classList.toggle('open')">
+              <div class="stc-rubric-num">3</div>
+              <div class="stc-rubric-title">
+                <h3>Problem Defined</h3>
+                <p>Did the rep co-create the problem definition and guide the prospect to an &ldquo;aha&rdquo; moment?</p>
+              </div>
+              <svg class="stc-rubric-toggle" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="stc-rubric-body">
+              <div class="stc-tiers">
+                <div class="stc-tier high">
+                  <div class="stc-tier-badge">
+                    <div class="stc-tier-score">4&ndash;5</div>
+                    <div class="stc-tier-label">High</div>
+                  </div>
+                  <div class="stc-tier-content">
+                    <p>Rep co-creates the problem definition, guiding the prospect to articulate the root cause themselves.</p>
+                    <div class="stc-tier-example">&ldquo;That&rsquo;s a good point &mdash; I guess the real problem
+                      isn&rsquo;t just the slow reports, it&rsquo;s that we don&rsquo;t trust the data.&rdquo;</div>
+                  </div>
+                </div>
+                <div class="stc-tier mid">
+                  <div class="stc-tier-badge">
+                    <div class="stc-tier-score">2&ndash;3</div>
+                    <div class="stc-tier-label">Mid</div>
+                  </div>
+                  <div class="stc-tier-content">
+                    <p>A problem is identified, but stays at surface level without exploring the root cause.</p>
+                    <div class="stc-tier-example">Customer: &ldquo;Our reporting is a mess.&rdquo; Rep: &ldquo;Okay, so
+                      messy reporting is the main issue.&rdquo;</div>
+                  </div>
+                </div>
+                <div class="stc-tier low">
+                  <div class="stc-tier-badge">
+                    <div class="stc-tier-score">0&ndash;1</div>
+                    <div class="stc-tier-label">Low</div>
+                  </div>
+                  <div class="stc-tier-content">
+                    <p>Rep accepts a vague symptom or immediately pitches a solution without defining the real problem.</p>
+                    <div class="stc-tier-example">Customer: &ldquo;Our reporting is slow.&rdquo; Rep: &ldquo;Great, our
+                      product is super fast!&rdquo;</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 4: Impact -->
+          <div class="stc-rubric">
+            <div class="stc-rubric-header" onclick="this.parentElement.classList.toggle('open')">
+              <div class="stc-rubric-num">4</div>
+              <div class="stc-rubric-title">
+                <h3>Impact</h3>
+                <p>Did the rep guide the customer to articulate the quantifiable business impact of the problem?</p>
+              </div>
+              <svg class="stc-rubric-toggle" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="stc-rubric-body">
+              <div class="stc-tiers">
+                <div class="stc-tier high">
+                  <div class="stc-tier-badge">
+                    <div class="stc-tier-score">4&ndash;5</div>
+                    <div class="stc-tier-label">High</div>
+                  </div>
+                  <div class="stc-tier-content">
+                    <p>Rep successfully guides the customer to articulate quantifiable negative consequences in business
+                      terms.</p>
+                    <div class="stc-tier-example">&ldquo;What&rsquo;s the cost in man-hours per week when your team has to
+                      manually fix those data errors?&rdquo;</div>
+                  </div>
+                </div>
+                <div class="stc-tier mid">
+                  <div class="stc-tier-badge">
+                    <div class="stc-tier-score">2&ndash;3</div>
+                    <div class="stc-tier-label">Mid</div>
+                  </div>
+                  <div class="stc-tier-content">
+                    <p>Discusses qualitative impact (&ldquo;that must be frustrating&rdquo;) but fails to quantify in
+                      business terms.</p>
+                    <div class="stc-tier-example">&ldquo;How does that frustration affect team morale?&rdquo;</div>
+                  </div>
+                </div>
+                <div class="stc-tier low">
+                  <div class="stc-tier-badge">
+                    <div class="stc-tier-score">0&ndash;1</div>
+                    <div class="stc-tier-label">Low</div>
+                  </div>
+                  <div class="stc-tier-content">
+                    <p>Rep ignores the impact or minimizes the pain, moving on without exploring consequences.</p>
+                    <div class="stc-tier-example">Customer: &ldquo;It&rsquo;s a huge headache.&rdquo; Rep: &ldquo;Okay.
+                      Anyway&hellip;&rdquo;</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 5: Ideal -->
+          <div class="stc-rubric">
+            <div class="stc-rubric-header" onclick="this.parentElement.classList.toggle('open')">
+              <div class="stc-rubric-num">5</div>
+              <div class="stc-rubric-title">
+                <h3>Ideal</h3>
+                <p>Did the rep get the prospect to describe their own ideal future state?</p>
+              </div>
+              <svg class="stc-rubric-toggle" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="stc-rubric-body">
+              <div class="stc-tiers">
+                <div class="stc-tier high">
+                  <div class="stc-tier-badge">
+                    <div class="stc-tier-score">4&ndash;5</div>
+                    <div class="stc-tier-label">High</div>
+                  </div>
+                  <div class="stc-tier-content">
+                    <p>Uses &ldquo;magic wand&rdquo; or vision-oriented questions to get the prospect to describe their own
+                      desired outcomes.</p>
+                    <div class="stc-tier-example">&ldquo;If you could wave a magic wand and design the perfect process from
+                      scratch, what would it look like?&rdquo;</div>
+                  </div>
+                </div>
+                <div class="stc-tier mid">
+                  <div class="stc-tier-badge">
+                    <div class="stc-tier-score">2&ndash;3</div>
+                    <div class="stc-tier-label">Mid</div>
+                  </div>
+                  <div class="stc-tier-content">
+                    <p>Leads the witness by framing the ideal state around their own product instead of the prospect&rsquo;s
+                      vision.</p>
+                    <div class="stc-tier-example">&ldquo;What if you had a dashboard that showed you all these metrics in
+                      real-time?&rdquo;</div>
+                  </div>
+                </div>
+                <div class="stc-tier low">
+                  <div class="stc-tier-badge">
+                    <div class="stc-tier-score">0&ndash;1</div>
+                    <div class="stc-tier-label">Low</div>
+                  </div>
+                  <div class="stc-tier-content">
+                    <p>Pitches their own product as the ideal solution instead of asking, or skips this step entirely.</p>
+                    <div class="stc-tier-example">&ldquo;Let me show you what the future could look like with our
+                      platform.&rdquo;</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 6: Benefit -->
+          <div class="stc-rubric">
+            <div class="stc-rubric-header" onclick="this.parentElement.classList.toggle('open')">
+              <div class="stc-rubric-num">6</div>
+              <div class="stc-rubric-title">
+                <h3>Benefit</h3>
+                <p>Did the rep connect discovery findings to outcomes the prospect can internalize?</p>
+              </div>
+              <svg class="stc-rubric-toggle" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="stc-rubric-body">
+              <div class="stc-tiers">
+                <div class="stc-tier high">
+                  <div class="stc-tier-badge">
+                    <div class="stc-tier-score">4&ndash;5</div>
+                    <div class="stc-tier-label">High</div>
+                  </div>
+                  <div class="stc-tier-content">
+                    <p>Reframes features into outcome-oriented questions, forcing the prospect to internalize the value.</p>
+                    <div class="stc-tier-example">&ldquo;You mentioned your team spends 20 hours a week on this. What would
+                      they do with that extra time?&rdquo;</div>
+                  </div>
+                </div>
+                <div class="stc-tier mid">
+                  <div class="stc-tier-badge">
+                    <div class="stc-tier-score">2&ndash;3</div>
+                    <div class="stc-tier-label">Mid</div>
+                  </div>
+                  <div class="stc-tier-content">
+                    <p>States a logical benefit but fails to explicitly connect it back to a pain the customer mentioned.</p>
+                    <div class="stc-tier-example">&ldquo;This will help your team be more efficient.&rdquo;</div>
+                  </div>
+                </div>
+                <div class="stc-tier low">
+                  <div class="stc-tier-badge">
+                    <div class="stc-tier-score">0&ndash;1</div>
+                    <div class="stc-tier-label">Low</div>
+                  </div>
+                  <div class="stc-tier-content">
+                    <p>Feature-dumps or states generic benefits disconnected from the conversation.</p>
+                    <div class="stc-tier-example">&ldquo;Our platform has 500+ connectors, AI-powered analytics, and
+                      real-time dashboards.&rdquo;</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 7: Layering -->
+          <div class="stc-rubric">
+            <div class="stc-rubric-header" onclick="this.parentElement.classList.toggle('open')">
+              <div class="stc-rubric-num">7</div>
+              <div class="stc-rubric-title">
+                <h3>Layering</h3>
+                <p>Did the rep use follow-up questions to peel back layers from operational to strategic?</p>
+              </div>
+              <svg class="stc-rubric-toggle" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="stc-rubric-body">
+              <div class="stc-tiers">
+                <div class="stc-tier high">
+                  <div class="stc-tier-badge">
+                    <div class="stc-tier-score">4&ndash;5</div>
+                    <div class="stc-tier-label">High</div>
+                  </div>
+                  <div class="stc-tier-content">
+                    <p>Uses simple follow-up questions to peel back multiple layers, moving from operational to strategic
+                      impact.</p>
+                    <div class="stc-tier-example">&ldquo;Tell me more about that.&rdquo; &hellip; &ldquo;What&rsquo;s the
+                      consequence of that when it happens?&rdquo;</div>
+                  </div>
+                </div>
+                <div class="stc-tier mid">
+                  <div class="stc-tier-badge">
+                    <div class="stc-tier-score">2&ndash;3</div>
+                    <div class="stc-tier-label">Mid</div>
+                  </div>
+                  <div class="stc-tier-content">
+                    <p>Asks one level of follow-up but stops there instead of continuing to dig deeper.</p>
+                    <div class="stc-tier-example">Customer: &ldquo;The report is slow.&rdquo; Rep: &ldquo;Why is that an
+                      issue?&rdquo; Customer: &ldquo;It delays our meetings.&rdquo; Rep: &ldquo;Okay.&rdquo;</div>
+                  </div>
+                </div>
+                <div class="stc-tier low">
+                  <div class="stc-tier-badge">
+                    <div class="stc-tier-score">0&ndash;1</div>
+                    <div class="stc-tier-label">Low</div>
+                  </div>
+                  <div class="stc-tier-content">
+                    <p>Accepts the first answer at face value and moves on without probing deeper at all.</p>
+                    <div class="stc-tier-example">Customer: &ldquo;It&rsquo;s slow.&rdquo; Rep: &ldquo;Got it. Next
+                      question&hellip;&rdquo;</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 8: Demo Preparedness -->
+          <div class="stc-rubric">
+            <div class="stc-rubric-header" onclick="this.parentElement.classList.toggle('open')">
+              <div class="stc-rubric-num">8</div>
+              <div class="stc-rubric-title">
+                <h3>Demo Preparedness</h3>
+                <p>Was the discovery rich enough to deliver a customized, compelling demo?</p>
+              </div>
+              <svg class="stc-rubric-toggle" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="stc-rubric-body">
+              <div class="stc-tiers">
+                <div class="stc-tier high">
+                  <div class="stc-tier-badge">
+                    <div class="stc-tier-score">4&ndash;5</div>
+                    <div class="stc-tier-label">High</div>
+                  </div>
+                  <div class="stc-tier-content">
+                    <p>Discovery was so rich the rep can deliver a highly customized demo framed as a compelling story.</p>
+                    <div class="stc-tier-example">&ldquo;Based on what you told me about X, I&rsquo;m going to show you
+                      exactly how we can solve that.&rdquo;</div>
+                  </div>
+                </div>
+                <div class="stc-tier mid">
+                  <div class="stc-tier-badge">
+                    <div class="stc-tier-score">2&ndash;3</div>
+                    <div class="stc-tier-label">Mid</div>
+                  </div>
+                  <div class="stc-tier-content">
+                    <p>Gathered enough info for a partially customized demo, but it lacks deep context from the
+                      conversation.</p>
+                    <div class="stc-tier-example">&ldquo;I&rsquo;ll show you our reporting module since you mentioned
+                      reports.&rdquo;</div>
+                  </div>
+                </div>
+                <div class="stc-tier low">
+                  <div class="stc-tier-badge">
+                    <div class="stc-tier-score">0&ndash;1</div>
+                    <div class="stc-tier-label">Low</div>
+                  </div>
+                  <div class="stc-tier-content">
+                    <p>Discovery was poor, forcing any demo to be a generic &ldquo;spray and pray&rdquo; presentation.</p>
+                    <div class="stc-tier-example">&ldquo;Let me walk you through all of our features&hellip;&rdquo;</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 9: Quantified Value -->
+          <div class="stc-rubric">
+            <div class="stc-rubric-header" onclick="this.parentElement.classList.toggle('open')">
+              <div class="stc-rubric-num">9</div>
+              <div class="stc-rubric-title">
+                <h3>Quantified Value</h3>
+                <p>Did the rep tie Domo&rsquo;s value to measurable business outcomes?</p>
+              </div>
+              <svg class="stc-rubric-toggle" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="stc-rubric-body">
+              <div class="stc-tiers">
+                <div class="stc-tier high">
+                  <div class="stc-tier-badge">
+                    <div class="stc-tier-score">4&ndash;5</div>
+                    <div class="stc-tier-label">High</div>
+                  </div>
+                  <div class="stc-tier-content">
+                    <p>Rep ties Domo&rsquo;s value to specific, measurable outcomes using numbers from the
+                      conversation.</p>
+                    <div class="stc-tier-example">&ldquo;If we cut that 20-hour weekly process to 2 hours, that&rsquo;s
+                      $180K in annual savings for your team alone.&rdquo;</div>
+                  </div>
+                </div>
+                <div class="stc-tier mid">
+                  <div class="stc-tier-badge">
+                    <div class="stc-tier-score">2&ndash;3</div>
+                    <div class="stc-tier-label">Mid</div>
+                  </div>
+                  <div class="stc-tier-content">
+                    <p>References value in general terms but doesn&rsquo;t anchor to specific numbers from discovery.</p>
+                    <div class="stc-tier-example">&ldquo;Customers typically see significant time savings with
+                      Domo.&rdquo;</div>
+                  </div>
+                </div>
+                <div class="stc-tier low">
+                  <div class="stc-tier-badge">
+                    <div class="stc-tier-score">0&ndash;1</div>
+                    <div class="stc-tier-label">Low</div>
+                  </div>
+                  <div class="stc-tier-content">
+                    <p>No attempt to quantify value, or uses only generic ROI claims disconnected from the
+                      prospect&rsquo;s situation.</p>
+                    <div class="stc-tier-example">&ldquo;Domo delivers 10x ROI for our customers.&rdquo;</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -1305,17 +1941,20 @@
           <div class="card-v">
             <div class="card-v-icon">&#127916;</div>
             <h3>Embedded Gong Player</h3>
-            <p>Listen to calls directly in the app. Split-pane view with the player on the left and scoring form on the right.</p>
+            <p>Listen to calls directly in the app. Split-pane view with the player on the left and scoring form on the
+              right.</p>
           </div>
           <div class="card-v">
             <div class="card-v-icon">&#128200;</div>
             <h3>Scores Over Time</h3>
-            <p>Track rep improvement with time-series visualization. See individual and team score trends across all STC categories.</p>
+            <p>Track rep improvement with time-series visualization. See individual and team score trends across all STC
+              categories.</p>
           </div>
           <div class="card-v">
             <div class="card-v-icon">&#128270;</div>
             <h3>Inline Column Filters</h3>
-            <p>Spreadsheet-style filters on every column. Search by account, rep, stage, manager, date range, and duration.</p>
+            <p>Spreadsheet-style filters on every column. Search by account, rep, stage, manager, date range, and
+              duration.</p>
           </div>
           <div class="card-v">
             <div class="card-v-icon">&#127380;</div>
@@ -1325,22 +1964,26 @@
           <div class="card-v">
             <div class="card-v-icon">&#128257;</div>
             <h3>Review Carousel</h3>
-            <p>Navigate between multiple reviews on the same call. See Leadership, Peer, and AI reviews side by side.</p>
+            <p>Navigate between multiple reviews on the same call. See Leadership, Peer, and AI reviews side by side.
+            </p>
           </div>
           <div class="card-v">
             <div class="card-v-icon">&#128101;</div>
             <h3>Anonymous Peers</h3>
-            <p>Peer reviewer names are anonymized in the dashboard for non-leaders. Leaders always see actual identities.</p>
+            <p>Peer reviewer names are anonymized in the dashboard for non-leaders. Leaders always see actual
+              identities.</p>
           </div>
           <div class="card-v">
             <div class="card-v-icon">&#128196;</div>
             <h3>AI Call Summaries</h3>
-            <p>Collapsible AI-generated call recap from Gong. Quickly understand the call before diving into the recording.</p>
+            <p>Collapsible AI-generated call recap from Gong. Quickly understand the call before diving into the
+              recording.</p>
           </div>
           <div class="card-v">
             <div class="card-v-icon">&#128736;</div>
             <h3>Modular Architecture</h3>
-            <p>Built with ES modules for maintainability. Queue, reviewed calls, workspace, and dashboard each in their own module.</p>
+            <p>Built with ES modules for maintainability. Queue, reviewed calls, workspace, and dashboard each in their
+              own module.</p>
           </div>
         </div>
       </div>
@@ -1355,12 +1998,18 @@
         </div>
         <div class="card-grid domo-stagger">
           <div class="card-h" style="flex-direction: column;">
-            <h3 style="font-size: 20px; font-weight: 600; color: var(--color-text-heading); margin-bottom: var(--space-sm);">Data Flow</h3>
-            <p style="font-size: 14px; color: var(--color-text-muted); line-height: 1.5; margin-bottom: var(--space-md);">Reviews write to AppDB, which syncs to a joined dataset for reading. Calls come from Gong via the Domo connector.</p>
+            <h3
+              style="font-size: 20px; font-weight: 600; color: var(--color-text-heading); margin-bottom: var(--space-sm);">
+              Data Flow</h3>
+            <p
+              style="font-size: 14px; color: var(--color-text-muted); line-height: 1.5; margin-bottom: var(--space-md);">
+              Reviews write to AppDB, which syncs to a joined dataset for reading. Calls come from Gong via the Domo
+              connector.</p>
             <div class="workflow" style="margin: 0; padding: 0; justify-content: flex-start;">
               <div class="workflow-step" style="font-size: 12px; padding: var(--space-sm) var(--space-md);">Gong</div>
               <span class="workflow-arrow">&#8594;</span>
-              <div class="workflow-step" style="font-size: 12px; padding: var(--space-sm) var(--space-md);">Dataset</div>
+              <div class="workflow-step" style="font-size: 12px; padding: var(--space-sm) var(--space-md);">Dataset
+              </div>
               <span class="workflow-arrow">&#8594;</span>
               <div class="workflow-step" style="font-size: 12px; padding: var(--space-sm) var(--space-md);">COMINT</div>
               <span class="workflow-arrow">&#8594;</span>
@@ -1368,9 +2017,14 @@
             </div>
           </div>
           <div class="card-h" style="flex-direction: column;">
-            <h3 style="font-size: 20px; font-weight: 600; color: var(--color-text-heading); margin-bottom: var(--space-sm);">Module Structure</h3>
-            <p style="font-size: 14px; color: var(--color-text-muted); line-height: 1.5; margin-bottom: var(--space-md);">8 ES modules with dependency injection for clean separation. No circular imports.</p>
-            <div style="font-size: 13px; color: var(--color-text-muted); font-family: 'SF Mono', SFMono-Regular, Menlo, monospace; line-height: 1.8;">
+            <h3
+              style="font-size: 20px; font-weight: 600; color: var(--color-text-heading); margin-bottom: var(--space-sm);">
+              Module Structure</h3>
+            <p
+              style="font-size: 14px; color: var(--color-text-muted); line-height: 1.5; margin-bottom: var(--space-md);">
+              8 ES modules with dependency injection for clean separation. No circular imports.</p>
+            <div
+              style="font-size: 13px; color: var(--color-text-muted); font-family: 'SF Mono', SFMono-Regular, Menlo, monospace; line-height: 1.8;">
               app.js &rarr; orchestrator<br>
               &nbsp;&nbsp;modules/state.js<br>
               &nbsp;&nbsp;modules/config.js<br>
@@ -1389,7 +2043,8 @@
 
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
-    <p><strong>COMINT</strong> &mdash; Communications Intelligence &nbsp;&middot;&nbsp; v2.2.0 &nbsp;&middot;&nbsp; Built on Domo</p>
+    <p><strong>COMINT</strong> &mdash; Communications Intelligence &nbsp;&middot;&nbsp; v2.2.0 &nbsp;&middot;&nbsp;
+      Built on Domo</p>
   </footer>
 
   <script>
@@ -1448,4 +2103,5 @@
     });
   </script>
 </body>
+
 </html>
